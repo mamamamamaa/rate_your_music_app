@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  rate_your_music_db:
+    container_name: rate_your_music_db
+    image: postgres:14
+    env_file:
+      - ./.env
+    volumes:
+      - db_pg_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "${DATABASE_PORT}:5432"
+    environment:
+      POSTGRES_DB: "${DATABASE_NAME}"
+      POSTGRES_USER: "${DATABASE_USER}"
+      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
+
+volumes:
+  db_pg_data:
