@@ -1,1 +1,1 @@
-create role rate_your_music_db with CREATEDB login password 'rate_your_music_db';
+-- create role rate_your_music_db with CREATEDB login password 'rate_your_music_db';
