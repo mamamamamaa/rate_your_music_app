@@ -1,0 +1,15 @@
+<h1>Tracks For You</h1>
+
+<% if @tracks.present? %>
+  <ul>
+    <% @tracks.each do |track| %>
+      <li>
+        <%= link_to track.title, track_path(track) %> from album <%= track.album.title %> by <%= track.artist.name %>
+        <br>
+        Genre: <%= track.genre.name %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No tracks found for your favorite genres.</p>
+<% end %>

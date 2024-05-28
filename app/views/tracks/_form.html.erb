@@ -1,0 +1,41 @@
+<%= form_with(model: track, local: true) do |form| %>
+  <% if track.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(track.errors.count, "error") %> prohibited this track from being saved:</h2>
+      <ul>
+        <% track.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :length, style: "display: block" %>
+    <%= form.number_field :length %>
+  </div>
+
+  <div class="field">
+    <%= form.label :artist_id, "Artist", style: "display: block" %>
+    <%= form.collection_select :artist_id, Artist.all, :id, :name, prompt: "Select an artist" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :genre_id, "Genre", style: "display: block" %>
+    <%= form.collection_select :genre_id, Genre.all, :id, :name, prompt: "Select a genre" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :album_id, "Album", style: "display: block" %>
+    <%= form.collection_select :album_id, Album.all, :id, :title, prompt: "Select an album" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

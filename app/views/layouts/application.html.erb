@@ -1,16 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RateYourMusic</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
+<head>
+  <title>RateYourMusic</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <style>
+      body {
+          padding-bottom: 60px;
+      }
+      .avatar-image {
+          width: 32px;
+          height: 32px;
+          object-fit: cover;
+          border-radius: 50%;
+      }
+      header, footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 20px;
+      }
+      .header-left, .header-center, .header-right {
+          display: flex;
+          align-items: center;
+      }
+      .header-center {
+          flex-grow: 1;
+          justify-content: center;
+      }
+      .header-right {
+          justify-content: flex-end;
+      }
+      .header-center a, .header-right a {
+          margin: 0 10px;
+          text-decoration: none;
+      }
+      footer {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          padding: 10px 0;
+      }
+      .footer-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      .footer-link {
+          margin: 0 15px;
+          text-decoration: none;
+      }
+  </style>
+</head>
+<body>
+<%= render "layouts/navbar" %>
+<main class="container mt-4">
+  <%= yield %>
+</main>
+<%= render "layouts/footer" %>
+</body>
 </html>

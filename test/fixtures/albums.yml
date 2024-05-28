@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  release_date: 2024-05-28
+  average_rating: 9.99
+  rated: 9.99
+  language: MyString
+  external_link: MyString
+  description: MyText
+  posted_by_id: 1
+
+two:
+  title: MyString
+  release_date: 2024-05-28
+  average_rating: 9.99
+  rated: 9.99
+  language: MyString
+  external_link: MyString
+  description: MyText
+  posted_by_id: 1

@@ -1,24 +1,34 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## APP SET UP
 
-Things you may want to cover:
+* Set up database:
+    ```
+    docker-compose up -d
+    ```
+* Install dependencies:
+    ```
+    bundle install
+    ```
+* Create database:
+    ```
+    bin/rails db:create
+    ```
+* Run server:
+    ```
+    bin/rails server
+    ```
 
-* Ruby version
+## Scaffold
 
-* System dependencies
+* After creating the tables with scaffold you need to do the migration:
+   ```
+    bin/rails db:migrate
+    ``` 
 
-* Configuration
+## Email Testing with MailCatcher
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Run MailCatcher:
+  ```
+    mailcatcher
+  ```

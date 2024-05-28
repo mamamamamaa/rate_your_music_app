@@ -1,0 +1,28 @@
+<div id="<%= dom_id profile %>">
+  <p>
+    <strong>First name:</strong>
+    <%= profile.first_name %>
+  </p>
+
+  <p>
+    <strong>Last name:</strong>
+    <%= profile.last_name %>
+  </p>
+
+  <p>
+    <strong>Avatar:</strong>
+    <% if profile.avatar.attached? %>
+      <%= image_tag profile.avatar, class: "avatar-image" %>
+    <% else %>
+      No avatar uploaded
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Favorite Genres:</strong>
+    <% genres = Genre.find(profile.favorite_genres) %>
+    <%= genres.map(&:name).join(', ') %>
+  </p>
+
+  <%= link_to "Show my reviews", my_reviews_reviews_path(profile.user), class: "btn btn-primary" %>
+</div>
