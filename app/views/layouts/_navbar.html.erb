@@ -1,15 +1,18 @@
 <header>
   <div class="header-left">
-    <%= link_to "RateYourMusic", root_path %>
+    <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+      <i class="fas fa-music fa-2x" style="color: #007bff"></i>
+      <span class="logo-text mx-lg-1">RateYourMusic</span>
+    <% end %>
   </div>
-  <div class="header-center">
-    <%= link_to "Labels", labels_path %>
-    <%= link_to "Genres", genres_path %>
-    <%= link_to "Artists", artists_path %>
-    <%= link_to "Albums", albums_path %>
-    <%= link_to "Tracks", tracks_path %>
-    <%= link_to "Tracks For You", tracks_for_you_tracks_path %>
-  </div>
+
+  <% if user_signed_in? %>
+    <div class="header-center">
+      <%= link_to "Artists", artists_path %>
+      <%= link_to "Albums", albums_path %>
+      <%= link_to "Albums For You", tracks_for_you_tracks_path %>
+    </div>
+  <% end %>
   <div class="header-right">
     <% if user_signed_in? %>
       <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>

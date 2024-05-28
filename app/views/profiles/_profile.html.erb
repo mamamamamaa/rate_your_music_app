@@ -1,28 +1,39 @@
-<div id="<%= dom_id profile %>">
-  <p>
-    <strong>First name:</strong>
-    <%= profile.first_name %>
-  </p>
+<% if profile.avatar.attached? %>
+  <div class="d-flex flex-column justify-content-center mb-5 align-items-center gap-3">
+    <%= image_tag profile.avatar, alt: "#{profile.first_name}'s avatar", class: "w-25 h-25 rounded-3" %>
+    <strong><%= profile.first_name %> <%= profile.last_name %></strong>
+  </div>
+<% end %>
 
-  <p>
-    <strong>Last name:</strong>
-    <%= profile.last_name %>
-  </p>
+<div id="<%= dom_id profile %>" class="card px-4 py-2">
+  <div class="profile-header">
+    <h2 class="profile-title">Profile</h2>
+  </div>
 
-  <p>
-    <strong>Avatar:</strong>
-    <% if profile.avatar.attached? %>
-      <%= image_tag profile.avatar, class: "avatar-image" %>
-    <% else %>
-      No avatar uploaded
-    <% end %>
-  </p>
+  <p class="profile-body">
+    <p>
+      <strong>First name:</strong>
+      <%= profile.first_name %>
+    </p>
 
-  <p>
-    <strong>Favorite Genres:</strong>
-    <% genres = Genre.find(profile.favorite_genres) %>
-    <%= genres.map(&:name).join(', ') %>
-  </p>
+    <p>
+      <strong>Last name:</strong>
+      <%= profile.last_name %>
+    </p>
 
-  <%= link_to "Show my reviews", my_reviews_reviews_path(profile.user), class: "btn btn-primary" %>
+    <p>
+      <strong>Email:</strong>
+      <%= current_user.email %>
+    </p>
+
+    <p>
+      <strong>Favorite Genres:</strong>
+      <% genres = Genre.where(id: profile.favorite_genres) %>
+      <%= genres.map(&:name).join(', ') %>
+    </p>
+
+  <div class="d-flex justify-content-center gap-5">
+    <%#= link_to "Show my reviews", my_reviews_reviews_path(profile.user), class: "btn btn-primary btn-inline mt-3 px-4" %>
+    <%= link_to "Edit this profile", edit_profile_path(@profile), class: "btn btn-secondary btn-inline mt-3 px-4" %>
+  </div>
 </div>

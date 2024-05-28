@@ -1,17 +1,17 @@
 <%= render @profile %>
 
-<div>
-  <%= link_to "Edit this profile", edit_profile_path(@profile) %> |
-  <%= link_to "Back to profiles", profiles_path %> |
-  <%= button_to "Destroy this profile", @profile, method: :delete %>
-</div>
+<h2 class="mt-5">My Reviews</h2>
 
-<div>
-  <%= form_with url: add_favorite_genre_profile_path(@profile), method: :post do |form| %>
-    <div>
-      <%= form.label :genre, "Add Favorite Genre" %>
-      <%= form.collection_select :genre_id, Genre.all, :id, :name %>
-    </div>
-    <%= form.submit "Add Genre", class: "btn btn-secondary" %>
-  <% end %>
-</div>
+<% if @reviews.present? %>
+  <ul>
+    <% @reviews.each do |review| %>
+      <li>
+        <%= link_to truncate(review.review, length: 25), review_path(review) %>
+        <br>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have not written any reviews yet.</p>
+<% end %>
+
