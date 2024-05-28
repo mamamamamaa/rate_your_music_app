@@ -2,15 +2,16 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: <%= ENV['DATABASE_NAME'] %>
-  username: <%= ENV['DATABASE_USER'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  port: <%= ENV['DATABASE_PORT'] %>
-  host: <%= ENV['DATABASE_HOST'] %>
+  database: <%= ENV['DATABASE_NAME'] || "rate_your_music_db" %>
+  username: <%= ENV['DATABASE_USER'] || "rate_your_music_db" %>
+  password: <%= ENV['DATABASE_PASSWORD'] || "rate_your_music_db" %>
+  port: <%= ENV['DATABASE_PORT'] || "7777" %>
+  host: <%= ENV['DATABASE_HOST'] || "127.0.0.1" %>
 development:
   <<: *default
 test:
   <<: *default
-  database: <%= ENV['DATABASE_TEST_NAME'] %>
+  database: rate_your_music_db_test
 production:
   <<: *default
+  database: rate_your_music_db_production

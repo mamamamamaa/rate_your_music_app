@@ -1,0 +1,17 @@
+<%= render @profile %>
+
+<div>
+  <%= link_to "Edit this profile", edit_profile_path(@profile) %> |
+  <%= link_to "Back to profiles", profiles_path %> |
+  <%= button_to "Destroy this profile", @profile, method: :delete %>
+</div>
+
+<div>
+  <%= form_with url: add_favorite_genre_profile_path(@profile), method: :post do |form| %>
+    <div>
+      <%= form.label :genre, "Add Favorite Genre" %>
+      <%= form.collection_select :genre_id, Genre.all, :id, :name %>
+    </div>
+    <%= form.submit "Add Genre", class: "btn btn-secondary" %>
+  <% end %>
+</div>
