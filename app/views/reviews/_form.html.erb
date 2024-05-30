@@ -1,31 +1,37 @@
-<%= form_with(model: review, local: true) do |form| %>
-  <% if review.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
-      <ul>
-        <% review.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <%= form_with(model: review, local: true, class: "needs-validation", novalidate: true) do |form| %>
+        <% if review.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+            <h4 class="alert-heading"><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h4>
+            <ul>
+              <% review.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="form-group">
+          <%= form.label :album_id, "Album", class: "form-label" %>
+          <%= form.collection_select :album_id, Album.all, :id, :title, { prompt: "Select an album" }, { class: "form-control" } %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :review, class: "form-label" %>
+          <%= form.text_area :review, class: "form-control", rows: 5 %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :rate, class: "form-label" %>
+          <%= form.number_field :rate, class: "form-control" %>
+        </div>
+
+        <div class="form-group text-center">
+          <%= form.submit "Submit Review", class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :album_id, "Album" %>
-    <%= form.collection_select :album_id, Album.all, :id, :title, prompt: "Select an album" %>
   </div>
-
-  <div class="field">
-    <%= form.label :review %>
-    <%= form.text_area :review %>
-  </div>
-
-  <div class="field">
-    <%= form.label :rate %>
-    <%= form.number_field :rate %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
