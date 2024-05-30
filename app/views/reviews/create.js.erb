@@ -1,0 +1,17 @@
+<% if @review.errors.any? %>
+  document.getElementById('error_explanation').style.display = 'block';
+  document.getElementById('error_list').innerHTML = '<%= @review.errors.full_messages.map { |msg| "<li>#{msg}</li>" }.join.html_safe %>';
+<% else %>
+  document.getElementById('<%= dom_id(@album) %>').innerHTML += `
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">Your Review</h5>
+          <p><strong>Review:</strong> <%= j @review.review %></p>
+          <p><strong>Rate:</strong> <%= @review.rate %></p>
+        </div>
+      </div>
+    `;
+  document.getElementById('new_review').reset();
+  document.querySelector('.average-rating').innerText = '<%= @album.average_rating %>';
+  document.querySelector('.rated').innerText = '<%= @album.rated %>';
+<% end %>

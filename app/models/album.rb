@@ -1,9 +1,15 @@
 class Album < ApplicationRecord
   belongs_to :artist
   has_many :tracks
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   validates :artist_id, presence: true
+
+  def update_ratings
+    self.rated = reviews.count
+    self.average_rating = reviews.average(:rate).to_f
+    save
+  end
 
   def self.ransackable_associations(auth_object = nil)
     ["artist", "reviews", "tracks"]

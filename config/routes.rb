@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :labels
   resources :genres
   resources :artists
-  resources :albums
+  resources :albums do
+    resources :reviews, only: [:new, :create]
+  end
   get "tracks_for_you", to: "albums#tracks_for_you"
   resources :tracks do
     collection do

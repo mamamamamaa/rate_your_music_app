@@ -1,12 +1,6 @@
-<div id="<%= dom_id artist %>">
-  <p>
-    <strong>Name:</strong>
-    <%= artist.name %>
-  </p>
-
-  <p>
-    <strong>Label:</strong>
-    <%= artist.label_id %>
-  </p>
-
+<div id="<%= dom_id artist %>" class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><strong>Name:</strong> <%= artist.name %></h5>
+    <p class="card-text"><strong>Label:</strong> <%= artist.label.name %></p>
+  </div>
 </div>
