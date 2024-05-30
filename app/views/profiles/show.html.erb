@@ -2,9 +2,9 @@
 
 <h2 class="mt-5">My Reviews</h2>
 
-<% if @reviews.present? %>
+<% if current_user.reviews.present? %>
   <ul>
-    <% @reviews.each do |review| %>
+    <% current_user.reviews.each do |review| %>
       <li>
         <%= link_to truncate(review.review, length: 25), review_path(review) %>
         <br>
@@ -14,4 +14,5 @@
 <% else %>
   <p>You have not written any reviews yet.</p>
 <% end %>
+
 

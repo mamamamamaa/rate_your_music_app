@@ -1,14 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Artists</h1>
+<%= link_to "New artist", new_artist_path,class: "btn btn-primary" %>
 
-<div id="artists">
-  <% @artists.each do |artist| %>
-    <%= render artist %>
-    <p>
-      <%= link_to "Show this artist", artist %>
-    </p>
-  <% end %>
+<div class="container mt-5">
+  <div class="row">
+    <% @artists.each do |artist| %>
+      <div class="col-md-4">
+        <%= render partial: 'artist', locals: { artist: artist } %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
-<%= link_to "New artist", new_artist_path %>
