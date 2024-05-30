@@ -1,51 +1,59 @@
-<%= form_with(model: album, local: true) do |form| %>
-  <% if album.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(album.errors.count, "error") %> prohibited this album from being saved:</h2>
-      <ul>
-        <% album.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <%= form_with(model: album, local: true, class: "needs-validation", novalidate: true) do |form| %>
+        <% if album.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+            <h4 class="alert-heading"><%= pluralize(album.errors.count, "error") %> prohibited this album from being saved:</h4>
+            <ul>
+              <% album.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="form-group">
+          <%= form.label :title, class: "form-label" %>
+          <%= form.text_field :title, class: "form-control", required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :artist_id, "Artist", class: "form-label" %>
+          <%= form.collection_select :artist_id, Artist.all, :id, :name, {prompt: "Select an artist"}, {class: "form-control"} %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :release_date, class: "form-label" %>
+          <div class="d-flex gap-3">
+            <%= form.date_select :release_date, {}, {class: "form-control"} %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :average_rating, class: "form-label" %>
+          <%= form.number_field :average_rating, step: :any, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :rated, class: "form-label" %>
+          <%= form.number_field :rated, step: :any, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :language, class: "form-label" %>
+          <%= form.text_field :language, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :description, class: "form-label" %>
+          <%= form.text_area :description, class: "form-control" %>
+        </div>
+
+        <div class="form-group text-center">
+          <%= form.submit "Save Album", class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
   </div>
-
-  <div class="field">
-    <%= form.label :artist_id, "Artist" %>
-    <%= form.collection_select :artist_id, Artist.all, :id, :name, prompt: "Select an artist" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :release_date %>
-    <%= form.date_select :release_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :average_rating %>
-    <%= form.number_field :average_rating, step: :any %>
-  </div>
-
-  <div class="field">
-    <%= form.label :rated %>
-    <%= form.number_field :rated, step: :any %>
-  </div>
-
-  <div class="field">
-    <%= form.label :language %>
-    <%= form.text_field :language %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

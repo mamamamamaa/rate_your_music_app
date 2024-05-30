@@ -1,15 +1,26 @@
-<h1>Tracks For You</h1>
+<div class="container mt-5">
+  <h1 class="text-center mb-5">Tracks For You</h1>
 
-<% if @tracks.present? %>
-  <ul>
-    <% @tracks.each do |track| %>
-      <li>
-        <%= link_to track.title, track_path(track) %> from album <%= track.album.title %> by <%= track.artist.name %>
-        <br>
-        Genre: <%= track.genre.name %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No tracks found for your favorite genres.</p>
-<% end %>
+  <% if @tracks.present? %>
+    <div class="row">
+      <% @tracks.each do |track| %>
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to track.title, track_path(track), class: "text-primary" %></h5>
+              <p class="card-text">
+                from album <%= link_to track.album.title, album_path(track.album), class: "text-secondary" %>
+                by <%= link_to track.artist.name, artist_path(track.artist), class: "text-secondary" %>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">Genre: <%= link_to track.genre.name, genre_path(track.genre), class: "text-secondary" %></small>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center">No tracks found for your favorite genres.</p>
+  <% end %>
+</div>

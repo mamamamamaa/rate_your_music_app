@@ -1,27 +1,29 @@
-<div id="<%= dom_id track %>">
-  <p>
-    <strong>Title:</strong>
-    <%= track.title %>
-  </p>
-
-  <p>
-    <strong>Length:</strong>
-    <%= track.length %>
-  </p>
-
-  <p>
-    <strong>Artist:</strong>
-    <%= track.artist_id %>
-  </p>
-
-  <p>
-    <strong>Genre:</strong>
-    <%= track.genre_id %>
-  </p>
-
-  <p>
-    <strong>Album:</strong>
-    <%= track.album_id %>
-  </p>
-
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title"><%= track.title %></h2>
+        </div>
+        <div class="card-body">
+          <p>
+            <strong>Length:</strong>
+            <%= track.length %>
+          </p>
+          <p>
+            <strong>Artist:</strong>
+            <%= link_to track.artist.name, artist_path(track.artist), class: "text-secondary" %>
+          </p>
+          <p>
+            <strong>Genre:</strong>
+            <%= link_to track.genre.name, genre_path(track.genre), class: "text-secondary" %>
+          </p>
+          <p>
+            <strong>Album:</strong>
+            <%= link_to track.album.title, album_path(track.album), class: "text-secondary" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
