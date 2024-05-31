@@ -17,6 +17,6 @@ class Album < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["artist_id", "average_rating", "created_at", "description", "external_link", "id", "id_value", "language", "posted_by_id", "rated", "release_date", "title", "updated_at"]
+    ["artist_id", "average_rating", "created_at", "description", "external_link", "id", "id_value", "language", "posted_by_id", "rated", "release_date", "title", "updated_at", "avatar_attachment_id_eq", "avatar_blob_id_eq", "avatar_cont", "avatar_eq", "avatar_start", "avatar_end"]
   end
 end

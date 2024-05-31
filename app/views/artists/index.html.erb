@@ -31,7 +31,6 @@
         <td><%= artist.name %></td>
         <td><%= link_to artist.label.name, label_path(artist.label) %></td>
         <td><%= link_to "Show", artist_path(artist), class: "btn btn-info btn-sm" %></td>
-        <td><%= link_to "Edit", edit_artist_path(artist), class: "btn btn-warning btn-sm" %></td>
       </tr>
     <% end %>
     </tbody>

@@ -3,7 +3,7 @@
 <h2 class="mt-5">My Reviews</h2>
 
 <% if current_user.reviews.present? %>
-  <p>You have written <%= current_user.reviews.count %> reviews. <%= link_to 'View all reviews', my_reviews_reviews_path, class: 'btn btn-primary' %></p>
+  <p>You have written <%= current_user.reviews.count %> reviews. <br/> <%= link_to 'View all reviews', my_reviews_reviews_path, class: 'btn btn-primary mt-2' %></p>
 <% else %>
   <p>You have not written any reviews yet.</p>
 <% end %>
