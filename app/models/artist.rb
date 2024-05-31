@@ -1,4 +1,5 @@
 class Artist < ApplicationRecord
+  has_one_attached :avatar
   belongs_to :label
   has_many :albums
   has_many :tracks

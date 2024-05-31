@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
   resources :reviews do
     collection do
-      get :my_reviews
+      get 'my_reviews'
     end
   end
   resources :tracks

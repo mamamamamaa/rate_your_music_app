@@ -1,14 +1,24 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <h1 class="text-center mb-5">Labels</h1>
 
-<h1>Labels</h1>
+  <%= link_to "New Label", new_label_path, class: "btn btn-primary mb-4" %>
 
-<div id="labels">
-  <% @labels.each do |label| %>
-    <%= render label %>
-    <p>
-      <%= link_to "Show this label", label %>
-    </p>
+  <% if @labels.present? %>
+    <div class="row">
+      <% @labels.each do |label| %>
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to label.name, label_path(label), class: "text-primary" %></h5>
+              <p class="card-text">
+                <small class="text-muted">Artists in this label: <%= label.artists.count %></small>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center">No labels found.</p>
   <% end %>
 </div>
-
-<%= link_to "New label", new_label_path %>

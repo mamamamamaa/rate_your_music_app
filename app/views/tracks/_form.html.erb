@@ -1,41 +1,47 @@
-<%= form_with(model: track, local: true) do |form| %>
-  <% if track.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(track.errors.count, "error") %> prohibited this track from being saved:</h2>
-      <ul>
-        <% track.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <%= form_with(model: track, local: true, class: "needs-validation", novalidate: true) do |form| %>
+        <% if track.errors.any? %>
+          <div class="alert alert-danger">
+            <h4 class="alert-heading"><%= pluralize(track.errors.count, "error") %> prohibited this track from being saved:</h4>
+            <ul>
+              <% track.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="form-group">
+          <%= form.label :title, class: "form-label" %>
+          <%= form.text_field :title, class: "form-control", required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :length, class: "form-label" %>
+          <%= form.number_field :length, class: "form-control", required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :artist_id, "Artist", class: "form-label" %>
+          <%= form.collection_select :artist_id, Artist.all, :id, :name, {prompt: "Select an artist"}, {class: "form-control"} %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :genre_id, "Genre", class: "form-label" %>
+          <%= form.collection_select :genre_id, Genre.all, :id, :name, {prompt: "Select a genre"}, {class: "form-control"} %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :album_id, "Album", class: "form-label" %>
+          <%= form.collection_select :album_id, Album.all, :id, :title, {prompt: "Select an album"}, {class: "form-control"} %>
+        </div>
+
+        <div class="form-group text-center">
+          <%= form.submit "Save Track", class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
   </div>
-
-  <div class="field">
-    <%= form.label :length, style: "display: block" %>
-    <%= form.number_field :length %>
-  </div>
-
-  <div class="field">
-    <%= form.label :artist_id, "Artist", style: "display: block" %>
-    <%= form.collection_select :artist_id, Artist.all, :id, :name, prompt: "Select an artist" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :genre_id, "Genre", style: "display: block" %>
-    <%= form.collection_select :genre_id, Genre.all, :id, :name, prompt: "Select a genre" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :album_id, "Album", style: "display: block" %>
-    <%= form.collection_select :album_id, Album.all, :id, :title, prompt: "Select an album" %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

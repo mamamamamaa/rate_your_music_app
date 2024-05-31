@@ -1,0 +1,3 @@
+document.getElementById("review_<%= @review.id %>").remove();
+document.querySelector(".average-rating").innerText = "<%= @album.average_rating %>";
+document.querySelector(".rated").innerText = "<%= @album.rated %>";

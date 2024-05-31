@@ -1,6 +1,7 @@
 class Album < ApplicationRecord
+  has_one_attached :avatar
   belongs_to :artist
-  has_many :tracks
+  has_many :tracks, dependent: :destroy
   has_many :reviews, dependent: :destroy
 
   validates :artist_id, presence: true
