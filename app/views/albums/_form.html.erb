@@ -3,7 +3,7 @@
     <div class="col-md-8">
       <%= form_with(model: album, local: true, class: "needs-validation", novalidate: true) do |form| %>
         <% if album.errors.any? %>
-          <div id="error_explanation" class="alert alert-danger">
+          <div class="alert alert-danger">
             <h4 class="alert-heading"><%= pluralize(album.errors.count, "error") %> prohibited this album from being saved:</h4>
             <ul>
               <% album.errors.full_messages.each do |message| %>
@@ -24,20 +24,15 @@
         </div>
 
         <div class="form-group">
+          <%= form.label :label_id, "Label", class: "form-label" %>
+          <%= form.collection_select :label_id, Label.all, :id, :name, {prompt: "Select a label"}, {class: "form-control"} %>
+        </div>
+
+        <div class="form-group">
           <%= form.label :release_date, class: "form-label" %>
           <div class="d-flex gap-3">
             <%= form.date_select :release_date, {}, {class: "form-control"} %>
           </div>
-        </div>
-
-        <div class="form-group">
-          <%= form.label :average_rating, class: "form-label" %>
-          <%= form.number_field :average_rating, step: :any, class: "form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label :rated, class: "form-label" %>
-          <%= form.number_field :rated, step: :any, class: "form-control" %>
         </div>
 
         <div class="form-group">
@@ -50,6 +45,14 @@
           <%= form.text_area :description, class: "form-control" %>
         </div>
 
+        <div class="form-group">
+          <%= form.label :avatar, class: "form-label d-block" %>
+          <div class="custom-file">
+            <%= form.file_field :avatar, class: "custom-file-input", id: "customFile" %>
+            <label class="custom-file-label" for="customFile" id="customFileLabel">Choose file</label>
+          </div>
+        </div>
+
         <div class="form-group text-center">
           <%= form.submit "Save Album", class: "btn btn-primary" %>
         </div>
@@ -57,3 +60,10 @@
     </div>
   </div>
 </div>
+
+<script>
+    document.getElementById('customFile').addEventListener('change', (e) => {
+        const fileName = e.target.files[0].name;
+        document.getElementById('customFileLabel').innerText = fileName;
+    });
+</script>

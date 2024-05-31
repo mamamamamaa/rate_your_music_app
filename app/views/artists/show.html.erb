@@ -1,7 +1,58 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @artist %>
+<% if @artist.avatar.attached? %>
+  <div class="text-center mb-4">
+    <%= image_tag @artist.avatar, class: "img-fluid", style: "max-width: 500px;" %>
+  </div>
+<% end %>
 
-<div class="d-flex justify-content-between mt-3">
-  <%= link_to "Back to artists", artists_path, class: "btn btn-secondary" %>
-</div>
+<h1 class="text-center"><%= @artist.name %></h1>
+
+<h2 class="mt-5">Albums by <%= @artist.name %></h2>
+
+<% if @artist.albums.present? %>
+  <ul>
+    <% @artist.albums.each do |album| %>
+      <li class="container mt-5" style="list-style-type: none">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="card mb-4">
+              <div class="card-header">
+                <h2 class="card-title"><%= link_to album.title, album_path(album) %></h2>
+              </div>
+              <div class="card-body">
+                <p>
+                  <strong>Release date:</strong>
+                  <%= album.release_date %>
+                </p>
+                <p>
+                  <strong>Average rating:</strong>
+                  <%= album.average_rating %>
+                </p>
+                <p>
+                  <strong>Rated:</strong>
+                  <%= album.rated %>
+                </p>
+                <p>
+                  <strong>Language:</strong>
+                  <%= album.language %>
+                </p>
+                <p>
+                  <strong>Description:</strong>
+                  <%= album.description %>
+                </p>
+                <% if album.avatar.attached? %>
+                  <div class="album-cover">
+                    <%= image_tag album.avatar, class: "img-thumbnail", style: "width: 300px; height: 300px; object-fit: cover;" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="text-center">This artist has no albums yet.</p>
+<% end %>

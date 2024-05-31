@@ -3,40 +3,7 @@
 <h2 class="mt-5">My Reviews</h2>
 
 <% if current_user.reviews.present? %>
-  <ul>
-    <% current_user.reviews.each do |review| %>
-      <li class="container mt-5" style="list-style-type: none">
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <div class="card mb-4">
-              <div class="card-header">
-                <h2 class="card-title">Review</h2>
-              </div>
-              <div class="card-body">
-                <p>
-                  <strong>Album:</strong>
-                  <%= link_to review.album.title, album_path(review.album) %>
-                </p>
-                <p>
-                  <strong>Review:</strong>
-                  <%= review.review %>
-                </p>
-                <p>
-                  <strong>Rate:</strong>
-                  <%= review.rate %>
-                </p>
-              </div>
-              <div class="card-footer text-center">
-                <%= button_to "Destroy this review", review_path(review), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger mx-2 mt-2" %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+  <p>You have written <%= current_user.reviews.count %> reviews. <%= link_to 'View all reviews', my_reviews_reviews_path, class: 'btn btn-primary' %></p>
 <% else %>
   <p>You have not written any reviews yet.</p>
 <% end %>
-
-

@@ -1,3 +1,100 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @album %>
+<% if @album.avatar.attached? %>
+  <div class="text-center mb-4">
+    <%= image_tag @album.avatar, class: "img-fluid", style: "max-width: 500px;" %>
+  </div>
+<% end %>
+
+<h1 class="text-center"><%= @album.title %></h1>
+
+<div class="card mt-3">
+  <div class="card-body">
+    <p class="card-text"><strong>Release date:</strong> <%= @album.release_date %></p>
+    <p class="card-text"><strong>Average rating:</strong> <span class="average-rating"><%= @album.average_rating %></span></p>
+    <p class="card-text"><strong>Rated:</strong> <span class="rated"><%= @album.rated %></span></p>
+    <p class="card-text"><strong>Language:</strong> <%= @album.language %></p>
+    <p class="card-text"><strong>External link:</strong> <%= link_to @album.external_link, @album.external_link %></p>
+    <p class="card-text"><strong>Description:</strong> <%= @album.description %></p>
+    <p class="card-text"><strong>Posted by:</strong> <%= @album.posted_by_id %></p>
+  </div>
+</div>
+
+<h2 class="mt-5">Tracks in this Album</h2>
+
+<% if @album.tracks.present? %>
+  <ul>
+    <% @album.tracks.each do |track| %>
+      <li class="container mt-5" style="list-style-type: none">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="card mb-4">
+              <div class="card-header">
+                <h2 class="card-title"><%= link_to track.title, track_path(track) %></h2>
+              </div>
+              <div class="card-body">
+                <p>
+                  <strong>Length:</strong>
+                  <%= track.length %> seconds
+                </p>
+                <p>
+                  <strong>Artist:</strong>
+                  <%= link_to track.artist.name, artist_path(track.artist) %>
+                </p>
+                <p>
+                  <strong>Genre:</strong>
+                  <%= link_to track.genre.name, genre_path(track.genre) %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="text-center">No tracks in this album yet.</p>
+<% end %>
+
+<h3 class="mt-5">Review</h3>
+
+<% user_review = current_user.reviews.find_by(album_id: @album.id) %>
+<% if user_review %>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Your Review</h5>
+      <p><strong>Review:</strong> <%= user_review.review %></p>
+      <p><strong>Rate:</strong> <%= user_review.rate %></p>
+    </div>
+  </div>
+<% else %>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Add a Review</h5>
+      <%= form_with(model: [@album, @album.reviews.build], local: false, id: "new_review") do |form| %>
+        <div id="error_explanation" class="alert alert-danger" style="display: none;">
+          <h4 class="alert-heading"><%= pluralize(@album.reviews.build.errors.count, "error") %> prohibited this review from being saved:</h4>
+          <ul id="error_list"></ul>
+        </div>
+
+        <div class="form-group">
+          <%= form.hidden_field :album_id, value: @album.id %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :review, class: "form-label" %>
+          <%= form.text_area :review, class: "form-control", rows: 5 %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :rate, class: "form-label" %>
+          <%= form.number_field :rate, class: "form-control", min: 1, max: 5 %>
+        </div>
+
+        <div class="form-group">
+          <%= form.submit "Submit Review", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

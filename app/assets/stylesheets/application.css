@@ -1,0 +1,26 @@
+.avatar-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.avatar-image-large {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.w-25 {
+    width: 25%;
+}
+
+.h-25 {
+    height: 25%;
+}
+
+.rounded-3 {
+    border-radius: 0.75rem;
+}

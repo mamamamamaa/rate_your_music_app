@@ -1,10 +1,37 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @label %>
-
-<div>
-  <%= link_to "Edit this label", edit_label_path(@label) %> |
-  <%= link_to "Back to labels", labels_path %>
-
-  <%= button_to "Destroy this label", @label, method: :delete %>
+<div class="text-center mb-4">
+  <% if @label.avatar.attached? %>
+    <%= image_tag @label.avatar, class: "img-fluid", style: "max-width: 500px;" %>
+  <% end %>
+  <h1 class="mt-3"><%= @label.name %></h1>
 </div>
+
+<h2 class="mt-5">Artists under <%= @label.name %></h2>
+
+<% if @label.artists.present? %>
+  <ul>
+    <% @label.artists.each do |artist| %>
+      <li class="container mt-5" style="list-style-type: none">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="card mb-4">
+              <div class="card-header">
+                <h2 class="card-title"><%= link_to artist.name, artist_path(artist) %></h2>
+              </div>
+              <div class="card-body text-center">
+                <% if artist.avatar.attached? %>
+                  <div class="artist-avatar">
+                    <%= image_tag artist.avatar, class: "img-thumbnail", style: "width: 150px; height: 150px; object-fit: cover;" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="text-center">This label has no artists yet.</p>
+<% end %>

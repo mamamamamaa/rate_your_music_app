@@ -1,6 +1,12 @@
-<div id="<%= dom_id artist %>" class="card mb-3">
+<div id="<%= dom_id artist %>" class="card mt-3">
+  <% if artist.avatar.attached? %>
+    <div class="d-flex flex-column justify-content-center mb-5 align-items-center gap-3">
+      <%= image_tag artist.avatar, alt: "#{artist.name}'s avatar", class: "w-25 h-25 rounded-3" %>
+    </div>
+  <% end %>
+
   <div class="card-body">
-    <h5 class="card-title"><strong>Name:</strong> <%= artist.name %></h5>
+    <h5 class="card-title"><%= artist.name %></h5>
     <p class="card-text"><strong>Label:</strong> <%= artist.label.name %></p>
   </div>
 </div>

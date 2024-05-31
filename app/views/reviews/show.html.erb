@@ -1,3 +1,10 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-4">
+  <h1>Review for <%= link_to @review.album.title, album_path(@review.album) %></h1>
 
-<%= render @review %>
+  <div class="card mt-3">
+    <div class="card-body">
+      <p class="card-text"><strong>Review:</strong> <%= @review.review %></p>
+      <p class="card-text"><strong>Rate:</strong> <%= @review.rate %></p>
+    </div>
+  </div>
+</div>

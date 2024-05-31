@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_28_175426) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_31_071302) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_175426) do
     t.string "title"
     t.date "release_date"
     t.decimal "average_rating"
-    t.decimal "rated"
+    t.integer "rated"
     t.string "language"
     t.string "external_link"
     t.text "description"
@@ -80,6 +80,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_175426) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "artist_id"
+    t.string "avatar"
   end
 
   create_table "artists", force: :cascade do |t|
@@ -87,6 +88,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_175426) do
     t.integer "label_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -99,6 +101,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_175426) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar"
   end
 
   create_table "profiles", force: :cascade do |t|

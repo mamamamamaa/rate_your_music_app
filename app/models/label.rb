@@ -1,5 +1,6 @@
 class Label < ApplicationRecord
-  has_many :artists
+  has_one_attached :avatar
+  has_many :artists, dependent: :destroy
 
   def self.ransackable_associations(auth_object = nil)
     ["artists"]

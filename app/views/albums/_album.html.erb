@@ -1,5 +1,10 @@
-<!-- app/views/albums/_album.html.erb -->
 <div id="<%= dom_id album %>" class="card mt-3">
+  <% if album.avatar.attached? %>
+    <div class="d-flex flex-column justify-content-center mb-5 align-items-center gap-3">
+      <%= image_tag album.avatar, alt: "#{album.title}'s cover", class: "w-25 h-25 rounded-3" %>
+    </div>
+  <% end %>
+
   <div class="card-body">
     <h5 class="card-title"><%= album.title %></h5>
     <p class="card-text"><strong>Release date:</strong> <%= album.release_date %></p>
@@ -11,44 +16,3 @@
     <p class="card-text"><strong>Posted by:</strong> <%= album.posted_by_id %></p>
   </div>
 </div>
-
-<% user_review = current_user.reviews.find_by(album_id: album.id) %>
-<% if user_review %>
-  <div class="card mt-3">
-    <div class="card-body">
-      <h5 class="card-title">Your Review</h5>
-      <p><strong>Review:</strong> <%= user_review.review %></p>
-      <p><strong>Rate:</strong> <%= user_review.rate %></p>
-    </div>
-  </div>
-<% else %>
-  <div class="card mt-3">
-    <div class="card-body">
-      <h5 class="card-title">Add a Review</h5>
-      <%= form_with(model: [album, album.reviews.build], local: false, id: "new_review") do |form| %>
-        <div id="error_explanation" class="alert alert-danger" style="display: none;">
-          <h4 class="alert-heading"><%= pluralize(album.reviews.build.errors.count, "error") %> prohibited this review from being saved:</h4>
-          <ul id="error_list"></ul>
-        </div>
-
-        <div class="form-group">
-          <%= form.hidden_field :album_id, value: album.id %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label :review, class: "form-label" %>
-          <%= form.text_area :review, class: "form-control", rows: 5 %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label :rate, class: "form-label" %>
-          <%= form.number_field :rate, class: "form-control", min: 1, max: 5 %>
-        </div>
-
-        <div class="form-group">
-          <%= form.submit "Submit Review", class: "btn btn-primary" %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-<% end %>
